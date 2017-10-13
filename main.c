@@ -10,33 +10,58 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+
 int main() {
     int Q=10, J=10, K=10, A=11;
-    int min=1, max=11;
     int flag = 1;
-    srand( time(NULL) );
+    srand(time(NULL) );
     int valor = (rand() % 11 ) + 1;
     int valor2= (rand() % 11 ) + 1;
     int valor3= (rand() % 11 ) + 1;
-    char respuesta, suma, respuesta2;
-    printf("¿Quieres Jugar un JackBlack? S/N \n");
+    char respuesta;
+    int respuesta1;
+    int suma;
+    bool s= true;
+    bool n=false;
+    printf(" ----------------------------------------\n");
+    printf(" |   ¿Quieres Jugar un JackBlack? S/N   |\n");
+    printf(" ----------------------------------------\n");
     scanf("%c",&respuesta);
     if (respuesta =='s'	|| 'S') {
         printf("Tus cartas son: \n");
-        printf("%d, %d \n",valor,valor2);
+        printf(" ----   ---- \n");
+        printf("| %d |, | %d |\n",valor,valor2);
+        printf(" ----   ---- \n");
         suma= valor+valor2;
+        printf("la suma de las cartas es: %d \n",suma);
         while (suma<=21 && flag==1) {
             printf("¿Quieres otra carta? S/N \n");
-            scanf("%c",&respuesta2);
-            if (respuesta =='s'	|| 'S') {
+            scanf("%d",&respuesta1);
+            getchar();
+            if (respuesta1 == 's'|| 'S') {
                 suma +=valor3;
-                printf("tienes : %c",suma);
+                printf("                        --- \n");
+                printf("Tu siguiente carta es: | %d | \n", valor3);
+                printf("                        --- \n");
+                printf("                                 --- \n");
+                printf("Ahora la suma de tus cartas es :| %d|\n",suma);
+                printf("                                 --- \n");
             }
-            suma +=valor3;
-            printf("tienes : %c",suma);
         }
-        
-        
+        if (suma>21) {
+            printf("HAS PERDIDO \n");
+        }
+        else{
+            if(suma==21) {
+                printf("HAS GANADO \n");
+            }
+            else{
+                if (suma<21) {
+                    printf("la suma de todas tus cartas fue: %d \n", suma);
+                }
+            }
+        }
     }
+
     return 0;
 }
