@@ -13,33 +13,83 @@
 
 int main() {
     int Q=10, J=10, K=10, A=11;
+    int baraja[52] = {1,2,3,4,5,6,7,8,9,10,11,12,13,1,2,3,4,5,6,7,8,9,10,11,12,13,1,2,3,4,5,6,7,8,9,10,11,12,13,1,2,3,4,5,6,7,8,9,10,11,12,13};
+    srand(time(NULL));
+    int aux = 0;
+    int suma;
+    int i = 0, j = 0, k = 0;
+    int C1, C3 = 0;
+    int C2;
     int flag = 1;
-    srand(time(NULL) );
-    int valor = (rand() % 11 ) + 1;
-    int valor2= (rand() % 11 ) + 1;
-    int valor3= (rand() % 11 ) + 1;
+
     char respuesta;
     char respuesta1;
-    int suma;
-    bool s= true;
-    bool n=false;
     printf(" ----------------------------------------\n");
     printf(" |   ¿Quieres Jugar un BlackJack? S/N   |\n");
     printf(" ----------------------------------------\n");
     scanf("%c",&respuesta);
     if (respuesta =='s'	&& 'S') {
         printf("Tus cartas son: \n");
+        i = rand()%52;
+        C1= baraja[i];
+        baraja[i] = 0;
+        j = rand()%52;
+        while (i==j) {
+            j = rand()%52;
+        }
+        C2 = baraja[j];
+        baraja[j] = 0;
+        if(C1== 1 && C2 == 1) {
+            
+            flag = 1;
+            while (flag == 1) {
+                printf("Obtuviste 2 Ases ¿Cuanto Quieres que valga 2 o 12?");
+                scanf("%d",&aux);
+                if (aux==2 || aux == 12) {
+                    flag = 0;
+                }
+                else{
+                    printf("Valor no permitido");
+                }
+            }
+        }
+        else{
+            if ((C1 == 1 || C2 == 1 ) && (C1 >= 10 || C2 >=10)) {
+                printf("GANANSTE PAPI, FELICIDADES ");
+            }
+                else{
+                switch (C1) {
+                    case 1:
+                        printf("Quieres 1 + C2 o 11 + C2");
+                    default:
+                        if (C1 > 10) {
+                            printf("Quieres 1 + C1 o 11 + C1");
+                        }
+                        else{
+                            if (C1 > 10) {
+                                C1 = 10;
+                                if (C2 > 10) {
+                                    C2 = 10;
+                                    suma = C1 + C2;
+                                }
+                            }
+                        }
+                        break;
+                }
+            }
+        }
+        
         printf(" ----   ---- \n");
-        printf("| %d | Y | %d |\n",valor,valor2);
+        printf("| %d | Y | %d |\n",C1,C2);
         printf(" ----   ---- \n");
-        suma= valor+valor2;
+        suma= C1+C2;
         printf("la suma de las cartas es: %d \n",suma);
         while (suma<=21 && flag==1) {
             printf("¿Quieres otra carta? S/N \n");
             scanf("%s",&respuesta1);
             getchar();
             if (respuesta1 == 's' || respuesta1 == 'S') {
-                suma +=valor3;
+                suma += C3;
                 printf("                                 ---- \n");
                 printf("Ahora la suma de tus cartas es :| %d |\n",suma);
                 printf("                                 ---- \n");
